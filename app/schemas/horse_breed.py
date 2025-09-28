@@ -14,6 +14,11 @@ class HorseBreedBase(BaseModel):
     average_weight: Optional[str] = Field(None, max_length=50, description="Average weight (e.g., '1000-1200 lbs')")
     temperament: Optional[str] = Field(None, max_length=200, description="Breed temperament")
     primary_use: Optional[str] = Field(None, max_length=100, description="Primary use (e.g., 'Racing', 'Show', 'Work')")
+    food_requirements: Optional[str] = Field(None, description="Nutritional and feeding requirements")
+    exercise_needs: Optional[str] = Field(None, description="Exercise and activity requirements")
+    common_health_issues: Optional[str] = Field(None, description="Common health problems and concerns")
+    habitat_requirements: Optional[str] = Field(None, description="Shelter and environment requirements")
+    grooming_needs: Optional[str] = Field(None, description="Grooming and maintenance requirements")
 
 
 class HorseBreedCreate(HorseBreedBase):
@@ -35,6 +40,11 @@ class HorseBreedUpdate(BaseModel):
     average_weight: Optional[str] = Field(None, max_length=50, description="Average weight")
     temperament: Optional[str] = Field(None, max_length=200, description="Breed temperament")
     primary_use: Optional[str] = Field(None, max_length=100, description="Primary use")
+    food_requirements: Optional[str] = Field(None, description="Nutritional and feeding requirements")
+    exercise_needs: Optional[str] = Field(None, description="Exercise and activity requirements")
+    common_health_issues: Optional[str] = Field(None, description="Common health problems and concerns")
+    habitat_requirements: Optional[str] = Field(None, description="Shelter and environment requirements")
+    grooming_needs: Optional[str] = Field(None, description="Grooming and maintenance requirements")
     is_active: Optional[bool] = Field(None, description="Whether the breed is active")
 
 

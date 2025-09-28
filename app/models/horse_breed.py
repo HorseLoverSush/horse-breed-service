@@ -18,6 +18,11 @@ class HorseBreed(Base):
     temperament = Column(String(200), nullable=True)
     primary_use = Column(String(100), nullable=True)  # e.g., "Racing", "Show", "Work"
     is_active = Column(Boolean, default=True, nullable=False)
+    food_requirements = Column(Text, nullable=True)  # e.g., "Grass, Hay, Grains"
+    exercise_needs = Column(Text, nullable=True)  # e.g., "Daily riding, turnout"
+    common_health_issues = Column(Text, nullable=True)  # e.g., "Col
+    habitat_requirements = Column(Text, nullable=True)  # e.g., "Shelter, pasture"
+    grooming_needs = Column(Text, nullable=True)  # e.g., "Regular brushing
     
     # Timestamps
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)

@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     DATABASE_USER: str = "horselover"
     DATABASE_PASSWORD: str = "monkhorselover@2025"
     AUTO_CREATE_TABLES: bool = True  # Automatically create tables on startup
+    RECREATE_TABLES: bool = False  # WARNING: Drops and recreates tables (deletes data!)
     
     @property
     def DATABASE_URL(self) -> str:
