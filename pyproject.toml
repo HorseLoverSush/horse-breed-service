@@ -7,10 +7,51 @@ addopts = [
     "-v",
     "--tb=short",
     "--strict-markers",
-    "--disable-warnings",
-    "--asyncio-mode=auto"
+    "--strict-config",
+    "--cov=app",
+    "--cov-report=html:htmlcov",
+    "--cov-report=term-missing",
+    "--cov-report=xml",
+    "--cov-fail-under=80",
+]
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests", 
+    "monitoring: Monitoring tests",
+    "error_handling: Error handling tests",
+    "logging: Logging tests",
+    "performance: Performance tests",
+    "slow: Slow running tests",
 ]
 asyncio_mode = "auto"
+
+[tool.coverage.run]
+source = ["app"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/migrations/*",
+    "*/venv/*",
+    "*/env/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+
+[tool.coverage.html]
+directory = "htmlcov"
 
 [tool.black]
 line-length = 88

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from typing import Optional
 from app.db.database import get_db
@@ -9,6 +9,7 @@ from app.schemas.horse_breed import (
     HorseBreedListResponse
 )
 from app.services.horse_breed_service import HorseBreedService
+from app.core.exceptions import NotFoundError
 from math import ceil
 
 # Create router for horse breeds endpoints
@@ -59,7 +60,7 @@ async def get_breed(
     breed = service.get_breed_by_id(breed_id)
     
     if not breed:
-        raise HTTPException(status_code=404, detail="Horse breed not found")
+        raise NotFoundError(resource="Horse breed", identifier=breed_id)
     
     return breed
 
@@ -73,12 +74,8 @@ async def create_breed(
     Create a new horse breed.
     """
     service = HorseBreedService(db)
-    
-    try:
-        breed = service.create_breed(breed_data)
-        return breed
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+    breed = service.create_breed(breed_data)
+    return breed
 
 
 @router.put("/{breed_id}", response_model=HorseBreedResponse)
@@ -91,14 +88,8 @@ async def update_breed(
     Update an existing horse breed.
     """
     service = HorseBreedService(db)
-    
-    try:
-        breed = service.update_breed(breed_id, breed_data)
-        if not breed:
-            raise HTTPException(status_code=404, detail="Horse breed not found")
-        return breed
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+    breed = service.update_breed(breed_id, breed_data)
+    return breed
 
 
 @router.delete("/{breed_id}", status_code=204)
@@ -110,8 +101,5 @@ async def delete_breed(
     Soft delete a horse breed (sets is_active to False).
     """
     service = HorseBreedService(db)
-    
-    if not service.delete_breed(breed_id):
-        raise HTTPException(status_code=404, detail="Horse breed not found")
-    
+    service.delete_breed(breed_id)
     return None
