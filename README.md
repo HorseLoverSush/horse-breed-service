@@ -172,7 +172,97 @@ The API will be available at:
 - **Detailed monitoring:** http://localhost:8000/monitoring/health
 - **System metrics:** http://localhost:8000/monitoring/metrics
 
-## 🔒 Security & Monitoring
+## � Cross-Platform Startup Scripts
+
+The project includes convenient startup scripts for different operating systems and environments. These scripts automatically handle virtual environment activation and service startup.
+
+### 🖥️ Windows
+
+#### PowerShell (Recommended)
+```powershell
+.\start_service.ps1
+```
+- **Features:** Colored output, detailed status messages, error handling
+- **Requirements:** Windows PowerShell 5.0+ or PowerShell Core 7+
+- **Best for:** Modern Windows development environments
+
+#### Command Prompt / Batch
+```cmd
+start_service.bat
+```
+- **Features:** Traditional Windows batch script with comprehensive validation
+- **Requirements:** Windows Command Prompt
+- **Best for:** Legacy Windows environments or CI/CD pipelines
+
+### 🐧 Linux / macOS
+
+#### Bash Script
+```bash
+chmod +x start_service.sh
+./start_service.sh
+```
+- **Features:** Cross-platform compatibility, environment validation
+- **Requirements:** Bash shell (available on most Linux/macOS systems)
+- **Best for:** Linux servers, macOS development, Docker containers
+
+### 🔧 Git Bash (Windows)
+
+```bash
+# Make script executable (first time only)
+chmod +x start_service.sh
+
+# Run the script
+./start_service.sh
+```
+- **Features:** Unix-like environment on Windows
+- **Requirements:** Git for Windows with Git Bash
+- **Best for:** Windows developers preferring Unix-style commands
+
+### ✨ Script Features
+
+All startup scripts include:
+
+- ✅ **Environment Validation** - Checks for virtual environment and required files
+- ✅ **Automatic Activation** - Activates the Python virtual environment
+- ✅ **Clear Status Messages** - User-friendly output with emojis and colors
+- ✅ **Error Handling** - Graceful failure with helpful error messages
+- ✅ **Service URLs** - Displays API documentation and health check URLs
+- ✅ **Cross-Platform** - Works across Windows, Linux, and macOS
+
+### 🎯 Quick Platform Guide
+
+| Platform | Recommended Script | Command |
+|----------|-------------------|---------|
+| **Windows 10/11** | PowerShell | `.\start_service.ps1` |
+| **Windows (Legacy)** | Batch | `start_service.bat` |
+| **Linux** | Bash | `./start_service.sh` |
+| **macOS** | Bash | `./start_service.sh` |
+| **Git Bash (Windows)** | Bash | `./start_service.sh` |
+| **Docker/Containers** | Bash | `./start_service.sh` |
+
+### 📋 Troubleshooting
+
+**Windows PowerShell Execution Policy:**
+```powershell
+# If you get execution policy errors, run:
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+**Permission Issues (Linux/macOS):**
+```bash
+# Make script executable
+chmod +x start_service.sh
+```
+
+**Virtual Environment Not Found:**
+```bash
+# Create virtual environment first
+python -m venv horse-breed-service-env
+
+# Then run the startup script
+```
+
+## �🔒 Security & Monitoring
 
 ### 🛡️ Security Features
 
